@@ -42,7 +42,7 @@ The **Laundry Management System** is a web-based application that streamlines th
 5. Open the app in your browser: `http://localhost:3000`
 
 ## 📷 Screenshots
-![App Screenshot](https://github.com/your-username/laundry-management/blob/main/screenshots/example.png)
+<img src="https://github.com/user-attachments/assets/c49265b5-8066-40ee-8cfb-ec8f09dbe49e">
 
 ## 💡 Future Enhancements
 - Payment gateway integration

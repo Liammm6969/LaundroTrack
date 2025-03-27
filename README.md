@@ -43,7 +43,7 @@ The **Laundry Management System** is a web-based application that streamlines th
 
 ## 📷 Screenshots
 <img src="https://github.com/user-attachments/assets/c49265b5-8066-40ee-8cfb-ec8f09dbe49e">
-<img src="https://github.com/user-attachments/assets/6e6d61d6-20c6-4ace-b801-6b4c36c4e1d0">
+<img src="https://github.com/user-attachments/assets/e8c8e0b6-9394-419d-9a47-f5bf5a56bf3e">
 
 ## 💡 Future Enhancements
 - Payment gateway integration

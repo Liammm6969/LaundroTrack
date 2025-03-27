@@ -1,4 +1,4 @@
-# Laundry Management System - WIP
+# Laundry Management System - A work in progress
 
 ## 📌 Overview
 The **Laundry Management System** is a web-based application that streamlines the laundry service process by allowing users to book laundry services, track order statuses, and manage laundry operations efficiently. This system ensures seamless order management from placement to pickup, improving customer experience and operational efficiency.

@@ -61,5 +61,5 @@ Contributions are welcome! To contribute:
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 📞 Contact
-For questions or suggestions, reach out to **Your Name** at [your.email@example.com](mailto:your.email@example.com).
+For questions or suggestions, reach out to **Liam** at [hed-mwpajarillo@smu.edu.ph](mailto:hed-mwpajarillo@smu.edu.ph).
 

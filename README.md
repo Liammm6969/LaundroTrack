@@ -19,7 +19,7 @@ The **Laundry Management System** is a web-based application that streamlines th
 ## 🔧 Installation & Setup
 ### Prerequisites:
 - Install [Node.js](https://nodejs.org/)
-- Install [MongoDB](https://www.mongodb.com/) (if using MongoDB)
+<!-- Install [MongoDB](https://www.mongodb.com/) (if using MongoDB) but -->
 
 ### Steps:
 1. Clone the repository:

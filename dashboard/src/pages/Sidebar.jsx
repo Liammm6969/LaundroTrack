@@ -30,7 +30,7 @@ function Sidebar() {
 
       <div className="menu">
         <BuildIcon className="icon" />
-        <Link to="/chatbot" className="link">
+        <Link to="/error" className="link">
           <p>SERVICES</p>
         </Link>
       </div>
@@ -44,7 +44,7 @@ function Sidebar() {
 
       <div className="menu">
         <ShoppingCartIcon className="icon" />
-        <Link to="/order-status" className="link">
+        <Link to="/error" className="link">
           <p>ORDER STATUS</p>
         </Link>
       </div>

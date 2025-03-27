@@ -2,18 +2,18 @@ import React from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 const data = [
-  { name: "Jan", value: 3000 },
-  { name: "Feb", value: 6000 },
-  { name: "Mar", value: 3000 },
-  { name: "Apr", value: 2000 },
-  { name: "May", value: 5000 },
-  { name: "Jun", value: 4500 },
-  { name: "Jul", value: 3800 },
-  { name: "Aug", value: 3200 },
-  { name: "Sep", value: 4000 },
-  { name: "Oct", value: 1500 },
-  { name: "Nov", value: 2800 },
-  { name: "Dec", value: 1000 },
+  { name: "Jan", value: 0 },
+  { name: "Feb", value: 0 },
+  { name: "Mar", value: 0 },
+  { name: "Apr", value: 0 },
+  { name: "May", value: 0 },
+  { name: "Jun", value: 0 },
+  { name: "Jul", value: 0 },
+  { name: "Aug", value: 0 },
+  { name: "Sep", value: 0 },
+  { name: "Oct", value: 0 },
+  { name: "Nov", value: 0 },
+  { name: "Dec", value: 0 },
 ];
 
 export default function OverviewChart() {

@@ -8,8 +8,8 @@ import LoadingScreen from "./pages/LoadingScreen";
 import { useState, useEffect } from "react";
 import OrderStatus from "./pages/OrderStatus";
 import Dashboard from "./pages/Dashboard"
-import User from "./pages/User"
-
+import User from "./pages/User";
+import Error from "./pages/Error"
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -30,6 +30,7 @@ function App() {
           <Route path="/orderstatus" element={<OrderStatus />} />
           <Route path="/user" element={<User />} />
           <Route path="/OrderStatus" element={<OrderStatus />} />
+          <Route path="/error" element={<Error />} />
         </Routes>
       )}
     </Router>

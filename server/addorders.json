@@ -7,5 +7,14 @@
     "date": "0001-01-01",
     "serviceType": "Dry",
     "status": "Pending"
+  },
+  {
+    "orderId": "321",
+    "customerName": "w",
+    "laundryWeight": "1",
+    "amountToPay": 150,
+    "date": "0001-01-01",
+    "serviceType": "Dry",
+    "status": "Pending"
   }
 ]

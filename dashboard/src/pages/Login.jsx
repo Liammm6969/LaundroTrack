@@ -34,13 +34,15 @@ function Login() {
   return (
     <div className="loginbody">
       <div>
-        <h2>LaundroTrack</h2>
+        <h2 className="title">LaundroTrack</h2>
+        
         <p>Our system enhances user experience in managing laundry</p>
+
         <p>LaundroTrack aims to innovate laundry management system</p>
       </div>
       <div className="login">
         <div className="login-box">
-          <h2>LaundroTrack</h2>
+          <h2 className="sign-in">Sign in</h2>
           <form onSubmit={handleLogin}>
             <TextField
               type="text"
@@ -50,7 +52,7 @@ function Login() {
               onChange={handleChange}
               required
               fullWidth
-              className="MuiTextField-root"
+              className="sign-in-field"
             />
 
             <div className="password-container">
@@ -62,7 +64,7 @@ function Login() {
                 onChange={handleChange}
                 required
                 fullWidth
-                className="MuiTextField-root"
+                className="sign-in-field"
               />
               <IconButton
                 className="eyeIcon"
@@ -70,11 +72,14 @@ function Login() {
               >
                 {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
               </IconButton>
+              
             </div>
-
-            <Button variant="contained" type="submit" startIcon={<LoginIcon />}>
+            <span className="forgot"><u>Forgot your password?</u></span>
+            <Button variant="contained" type="submit" className="loginButton" startIcon={<LoginIcon />}>
               Login
             </Button>
+            <span className="sign-up">Don't have an account? Sign up</span>
+            <span className="or">or</span>
           </form>
         </div>
       </div>

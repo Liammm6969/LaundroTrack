@@ -1,4 +1,3 @@
-/* Reset and base styles */
 html, body {
   margin: 0;
   padding: 0;
@@ -10,8 +9,7 @@ html, body {
 .loginbody {
   width: 100%;
   height: 100vh;
-  /* Dark theme background */
-  background: radial-gradient(circle, #071f47 50%, #1e033b 110%);
+  background: radial-gradient(circle, #12274b 50%, #1b0435 110%);
   margin: 0;
   padding: 0;
   position: absolute;
@@ -31,7 +29,7 @@ html, body {
 }
 
 .login-box {
-  background: rgba(30, 30, 45, 0.6);
+  background: rgba(38, 38, 66, 0.6);
   padding: 2.5rem;
   border-radius: 12px;
   box-shadow: 
@@ -41,7 +39,6 @@ html, body {
   max-width: 400px;
   width: 100%;
   
-  /* Enhanced glassmorphism effect */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -49,17 +46,32 @@ html, body {
   /* Subtle gradient overlay for depth */
   background: linear-gradient(
     135deg,
-    rgba(30, 30, 45, 0.7) 0%,
+    rgba(30, 30, 45, 0.171) 20%,
     rgba(20, 20, 35, 0.65) 100%
   );
 }
-
-h2 {
+.title {
+  color: white;
+  font-size: 2.4rem;
+}
+.sign-in {
   color: #fff;
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
   font-weight: 500;
-  text-align: center;
+  text-align: left;
+}
+.forgot{
+  color: white;
+  font-size: 0.8rem;
+  text-align: right;
+}
+.sign-up{
+  color: white;
+  font-size: 1rem;
+}
+.or{
+  color: white;
 }
 p{
   color: white;
@@ -70,26 +82,24 @@ form {
   gap: 1.2rem;
 }
 
-/* Input field styling */
-.MuiTextField-root {
-  background-color: rgba(22, 28, 36, 1);
+.sign-in-field {
+  background-color: rgb(41, 56, 75);
   border-radius: 6px;
   color: white;
 }
 
-.MuiTextField-root input {
+.sign-in-field input {
   color: white;
 }
 
-.MuiTextField-root input::placeholder {
+.sign-in-field input::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* Password container */
 .password-container {
   display: flex;
   align-items: center;
-  background-color: rgba(22, 28, 36, 1);
+  background-color: rgba(41, 56, 75);
   border-radius: 6px;
   padding-right: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -99,12 +109,10 @@ form {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Button styling */
-.MuiButton-contained {
-  background-color: white;
-  color: #121212 !important;
+.loginButton {
+  background-color: rgb(120, 53, 228) !important;
+  color: white !important;
   padding: 12px;
-  border-radius: 6px;
   font-weight: 500;
   text-transform: none;
   box-shadow: none !important;
@@ -112,11 +120,6 @@ form {
   text-align: center;
 }
 
-.MuiButton-contained:hover {
+.loginButton:hover {
   background-color: #f5f5f5 !important;
-}
-
-/* Make sure icon colors are visible */
-.MuiSvgIcon-root {
-  color: rgba(255, 255, 255, 0.7);
 }

@@ -33,8 +33,13 @@ function Login() {
 
   return (
     <div className="loginbody">
+      <div className="bubbles">
+      <img src="src\pictures\Late-Photoroom.png" alt="" />
+      </div>
       <div>
-        <h2 className="title">LaundroTrack</h2>
+        
+        <img src="" alt="" />
+        <h1 className="title">LaundroTrack</h1>
         
         <p>Our system enhances user experience in managing laundry</p>
 
@@ -78,7 +83,7 @@ function Login() {
             <Button variant="contained" type="submit" className="loginButton" startIcon={<LoginIcon />}>
               Login
             </Button>
-            <span className="sign-up">Don't have an account? Sign up</span>
+            <a href="" className="sign-up">Don't have an account? Sign up</a>
             <span className="or">or</span>
           </form>
         </div>

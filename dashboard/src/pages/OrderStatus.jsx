@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import ChatBot from "./ChatBot";
 import "./OrderStatus.css";
+import axios from "axios";
 
 function OrderStatus() {
   const location = useLocation();
@@ -28,18 +29,27 @@ function OrderStatus() {
     return <h2 className="no-order">No Order Selected</h2>;
   }
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const updatedOrder = { ...order, status };
 
-    const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
-    const updatedOrders = existingOrders.map((o) =>
-      o.id === updatedOrder.id ? updatedOrder : o
-    );
-    localStorage.setItem("orders", JSON.stringify(updatedOrders));
+    try {
+      // Update the order on the server
+      await axios.put(`http://localhost:1337/updateorder/${order.id || order.orderId}`, updatedOrder);
+      
+      // Also update localStorage for consistency
+      const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+      const updatedOrders = existingOrders.map((o) =>
+        (o.id === updatedOrder.id || o.orderId === updatedOrder.orderId) ? updatedOrder : o
+      );
+      localStorage.setItem("orders", JSON.stringify(updatedOrders));
+      localStorage.setItem("selectedOrder", JSON.stringify(updatedOrder));
 
-    localStorage.setItem("selectedOrder", JSON.stringify(updatedOrder));
-
-    navigate("/home", { state: { updatedOrder } });
+      // Navigate back to home with updated order
+      navigate("/home", { state: { updatedOrder } });
+    } catch (error) {
+      console.error("Error updating order:", error);
+      alert("Failed to update order. Please try again.");
+    }
   };
 
   return (
@@ -71,9 +81,10 @@ function OrderStatus() {
               </p>
             </div>
             <div>
-              <h3>#ORD-{order.id.toString().padStart(4, "0")}</h3>
+              <h3>#ORD-{(order?.id || order?.orderId)?.toString().padStart(4, "0")}</h3>
               <p>
-                <strong>Invoice To:</strong> {order.customerName}
+                <strong>Invoice To:</strong> {order.customerName} <br />
+                <strong>Amount to Pay:</strong> ₱{order.amountToPay}
               </p>
             </div>
           </div>
@@ -81,11 +92,11 @@ function OrderStatus() {
           <div className="right">
             <div className="addons">
               <h4>Add-ons</h4>
-              <p>Delivery: $5</p>
+              <p>Delivery: ₱5</p>
             </div>
             <div className="payment">
               <h4>Payments</h4>
-              <p>${order.amountToPay}</p>
+              <p>₱{order.amountToPay}</p>
               <p>{order.date} [cash]</p>
             </div>
             <div className="payActions">
@@ -113,9 +124,10 @@ function OrderStatus() {
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
-              <option value="Pending">Pending</option>
               <option value="Processing">Processing</option>
               <option value="Ready to be Picked Up">Ready to be Picked Up</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
             </select>
           </div>
         </div>

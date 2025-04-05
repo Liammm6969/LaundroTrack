@@ -1,20 +1,20 @@
 [
   {
-    "orderId": "1",
+    "orderId": "2",
     "customerName": "w",
     "laundryWeight": "1",
     "amountToPay": 150,
-    "date": "0001-01-01",
+    "date": "0002-02-02",
     "serviceType": "Dry",
-    "status": "Pending"
+    "status": "Cancelled"
   },
   {
-    "orderId": "321",
+    "orderId": "2",
     "customerName": "w",
     "laundryWeight": "1",
     "amountToPay": 150,
-    "date": "0001-01-01",
+    "date": "0002-02-02",
     "serviceType": "Dry",
-    "status": "Pending"
+    "status": "Processing"
   }
 ]

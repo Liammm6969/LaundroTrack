@@ -51,6 +51,7 @@ app.post("/addorder", (req, res) => {
     writeData(orderFile, users);
     res.status(201).json(req.body);
 });
+
 app.put("/updateorder/:orderId", function(req, res) {
     var updated = updateRecord(orderFile, req.params.id, req.body, "id");
     if (updated) res.json(updated);
@@ -58,10 +59,10 @@ app.put("/updateorder/:orderId", function(req, res) {
 });
 
 app.delete("/deleteorder/:orderId", function(req, res){
-    let { id } = req.params;
+    let { orderId } = req.params;
     let Order = JSON.parse(fs.readFileSync("addorders.json", "utf-8"));
   
-    Order = Order.filter((Order) => Order.orderId !== id);
+    Order = Order.filter((Order) => Order.orderId !== orderId);
   
     fs.writeFileSync("addorders.json", JSON.stringify(Order, null, 2));
     res.status(200).json({
@@ -87,6 +88,7 @@ app.put("/updateuser/:id", function(req, res) {
     else res.status(404).json({ message: "User not found" });
 });
 
+
 app.delete("/deleteuser/:id", function(req, res){
     let { id } = req.params;
     let User = JSON.parse(fs.readFileSync("users.json", "utf-8"));
@@ -99,6 +101,7 @@ app.delete("/deleteuser/:id", function(req, res){
       User,
     });
 });
+
 
 app.post("/login", (req, res) => {
     let users = readData(usersFile);

@@ -1,162 +1,426 @@
-.home {
-  display: flex;
-  flex-direction: column;
-}
-
-.dashboard {
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
   font-family: Arial, sans-serif;
 }
 
+.home {
+  width: 87%;
+  height: 100vh;
+  background: radial-gradient(circle, #092353 30%, #07012b 110%);
+  margin-left: 27.6vh;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.content {
+  margin-left: 190px; /* Adjust based on your sidebar width */
+  padding: 2rem;
+}
+
+/* Dashboard Styles */
+.dashboard {
+  max-width: 1200px;
+}
+
 .dashboard-header {
-  padding: 15px;
-  margin-bottom: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-}
-
-.dashboard-cards {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 2rem;
 }
 
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
-  text-align: center;
-  width: 220px;
-  font-weight: bold;
-  transition: 0.3s ease-in-out;
+.dashboard-header h2 {
+  margin: 0;
+  font-weight: 500;
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+.dashboard-header .add-btn {
+  background-color: rgb(120, 53, 228);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  text-transform: none;
+  box-shadow: 0 4px 10px rgba(120, 53, 228, 0.3);
 }
 
+.dashboard-header .add-btn:hover {
+  background-color: #9466e9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(120, 53, 228, 0.4);
+}
+
+/* Enhanced Table Styling */
 .revenue-table {
-  margin-top: 20px;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 12px;
   width: 100%;
+  margin-bottom: 2rem;
 }
 
 .revenue-table h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #333;
+  margin-top: 0;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: black;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.revenue-table .table-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.revenue-table .search-field {
+  background-color: rgb(41, 56, 75);
+  border-radius: 6px;
+  color: white;
+  width: 240px;
+}
+
+.revenue-table .search-field input {
+  color: white;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+}
+
+.revenue-table .search-field input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
 
 table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  background: white;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: transparent;
   border-radius: 8px;
   overflow: hidden;
 }
 
-th, td {
-  padding: 12px;
+.revenue-table th {
+  padding: 14px 16px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-th {
-  background-color: #1976d2;
+  background-color: rgba(41, 56, 75, 0.9);
   color: white;
-  font-weight: bold;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 2px solid rgba(120, 53, 228, 0.5);
 }
 
-td {
-  font-size: 16px;
-  color: #555;
+.revenue-table td {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
 }
 
-.details-btn {
-  background-color: #28a745;
+.revenue-table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.revenue-table tbody tr:hover {
+  background-color: rgba(120, 53, 228, 0.1);
+  transform: translateY(-1px);
+}
+
+.revenue-table tbody tr:nth-child(odd) {
+  background-color: #bbf3c8;
+}
+
+.revenue-table tbody tr:nth-child(odd):hover {
+  background-color: #95dba4;
+}
+
+/* Status indicators */
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-active {
+  background-color: #10b981; /* green */
+}
+
+.status-processing {
+  background-color: #f59e0b; /* amber */
+}
+
+.status-inactive {
+  background-color: #ef4444; /* red */
+}
+
+/* Action buttons container */
+.row-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.view-btn {
+  background-color: rgb(120, 53, 228);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.view-btn:hover {
+  background-color: #9466e9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(120, 53, 228, 0.3);
+}
+
+.delete-btn {
+  background-color: rgba(220, 53, 69, 0.8);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: rgb(220, 53, 69);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.table-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 16px;
+  gap: 8px;
+}
+
+.pagination-btn {
+  background-color: rgba(41, 56, 75, 0.8);
   color: white;
   border: none;
   padding: 6px 12px;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s;
-}
-.details-btn:hover {
-  background-color: #218838;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
 }
 
-.modal-box {
-  width: 400px;
-  background: white;
-  padding: 20px;
-  margin: auto;
-  margin-top: 10%;
+.pagination-btn:hover {
+  background-color: rgb(120, 53, 228);
+}
+
+.pagination-btn.active {
+  background-color: rgb(120, 53, 228);
+}
+
+.pagination-info {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin-right: 12px;
+}
+
+/* Empty state styling */
+.empty-table-state {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.empty-table-state svg {
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+.empty-table-state p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.empty-table-state button {
+  background-color: rgb(120, 53, 228) !important;
+  color: white !important;
+  border: none;
+  padding: 10px 16px !important;
+  border-radius: 6px !important;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500 !important;
+  text-transform: none !important;
+}
+
+/* Modal styling */
+.modal-box {
+  background: rgba(38, 38, 66, 0.8);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25),
+              0 2px 16px rgba(0, 0, 0, 0.15);
+  max-width: 400px;
+  width: 100%;
+  margin: auto;
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    135deg,
+    rgba(30, 30, 45, 0.6) 20%,
+    rgba(20, 20, 35, 0.85) 100%
+  );
+  gap: 16px;
 }
 
 .modal-box h2 {
-  font-size: 22px;
-  margin-bottom: 15px;
-  color: #333;
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: white;
+  font-weight: 500;
 }
 
-.modal-box input, .modal-box select {
-  padding: 10px;
-  margin: 10px 0; 
+/* Style for Material-UI inputs in dark mode */
+.modal-box .MuiInputBase-root {
+  background-color: rgb(41, 56, 75);
+  border-radius: 6px;
+  color: white;
+}
+
+.modal-box .MuiInputLabel-root {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.modal-box .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal-box .MuiInputBase-input {
+  color: white;
+}
+
+.modal-box .MuiInputBase-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+.modal-box .MuiSvgIcon-root {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .modal-buttons {
   display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .modal-buttons button {
-  padding: 10px 15px;
+  flex: 1;
+  padding: 12px !important;
+  border-radius: 6px !important;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-weight: 500 !important;
   transition: 0.3s;
-}
-.delete-btn {
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  margin-left: 5px;
-}
-.delete-btn:hover {
-  background-color: darkred;
 }
 
 .modal-buttons button:first-child {
-  background-color: #1976d2;
-  color: white;
+  background-color: rgb(120, 53, 228) !important;
+  color: white !important;
 }
 
 .modal-buttons button:first-child:hover {
-  background-color: #135ba0;
+  background-color: #9466e9 !important;
 }
 
 .modal-buttons button:last-child {
-  background-color: #d9534f;
-  color: white;
+  background-color: rgba(220, 53, 69, 0.8) !important;
+  color: white !important;
 }
 
 .modal-buttons button:last-child:hover {
-  background-color: #c9302c;
+  background-color: rgb(220, 53, 69) !important;
 }
 
-/* pantanggal nung box na invisible sa textfield ng date*/
+/* Hide calendar picker indicator */
 input[type="date"]::-webkit-calendar-picker-indicator {
   display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+  
+  .revenue-table {
+    padding: 1rem;
+  }
+  
+  .revenue-table th, .revenue-table td {
+    padding: 12px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .dashboard-cards {
+    flex-direction: column;
+  }
+  
+  .revenue-table h3 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .revenue-table .search-field {
+    width: 100%;
+  }
+  
+  .table-pagination {
+    justify-content: center;
+  }
 }

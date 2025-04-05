@@ -16,7 +16,9 @@ function Login() {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
-
+  function navigateToSignup(){
+    navigate('/signup')
+  }
   async function handleLogin(event) {
     event.preventDefault();
     try {
@@ -34,16 +36,14 @@ function Login() {
   return (
     <div className="loginbody">
       <div className="bubbles">
-      <img src="src\pictures\Late-Photoroom.png" alt="" />
+      <img src="src\pictures\bubblesPng.png" alt="" />
       </div>
       <div>
         
         <img src="" alt="" />
         <h1 className="title">LaundroTrack</h1>
         
-        <p>Our system enhances user experience in managing laundry</p>
-
-        <p>LaundroTrack aims to innovate laundry management system</p>
+        <p className="desc">Our system enhances user experience in managing laundry <br />LaundroTrack aims to innovate laundry management system</p>
       </div>
       <div className="login">
         <div className="login-box">
@@ -79,12 +79,11 @@ function Login() {
               </IconButton>
               
             </div>
-            <span className="forgot"><u>Forgot your password?</u></span>
+            <a href="" className="forgot"><u>Forgot your password?</u></a>
             <Button variant="contained" type="submit" className="loginButton" startIcon={<LoginIcon />}>
               Login
             </Button>
-            <a href="" className="sign-up">Don't have an account? Sign up</a>
-            <span className="or">or</span>
+            <p className="sign-up" >Don't have an account? <a href="" onClick={navigateToSignup}>Sign up</a> </p>
           </form>
         </div>
       </div>

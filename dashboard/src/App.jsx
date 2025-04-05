@@ -10,6 +10,7 @@ import OrderStatus from "./pages/OrderStatus";
 import Dashboard from "./pages/Dashboard"
 import User from "./pages/User";
 import Error from "./pages/Error"
+import SignUp from "./pages/Signup";
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -19,9 +20,9 @@ function App() {
 
   return (
     <Router>
-      {loading ? (
+      {/* {loading ? (
         <LoadingScreen />
-      ) : (
+      ) : ( */}
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
@@ -31,8 +32,10 @@ function App() {
           <Route path="/user" element={<User />} />
           <Route path="/OrderStatus" element={<OrderStatus />} />
           <Route path="/error" element={<Error />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
-      )}
+      {/* )} */}
     </Router>
   );
 }

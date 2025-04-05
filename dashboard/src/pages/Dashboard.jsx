@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
-import { Box, Typography, Button, Tabs, Tab, Card, CardContent, Grid, AppBar, Toolbar, InputBase, IconButton } from "@mui/material";
+import { 
+  Box, Typography, Button, Tabs, Tab, Card, CardContent, 
+  AppBar, Toolbar, InputBase, IconButton, Chip
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import DownloadIcon from "@mui/icons-material/Download";
+import AddIcon from "@mui/icons-material/Add";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import OrderBarChart from "./BarChart";
 import Sidebar from "./Sidebar";
-import "./Dashboard.css"; // Ensure correct file name
+import "./Dashboard.css";
 
-// TODO:  ayusin aralin
-//! ALERT WAG ASA SA AI
 const Dashboard = () => {
   const [tabValue, setTabValue] = useState(0);
-  const [orders, setOrders] = useState([]); // State to hold orders
+  const [orders, setOrders] = useState([]);
   const [newOrder, setNewOrder] = useState({
     customerName: '',
     status: 'Pending',
@@ -18,34 +20,30 @@ const Dashboard = () => {
     total: 0
   });
 
-  // Fetch orders from backend when component mounts
   useEffect(() => {
     fetchOrders();
   }, []);
 
   const fetchOrders = async () => {
     try {
-        const response = await fetch("http://localhost:1337/fetchorders");
-        const data = await response.json();
-        setOrders(data.data || []); // Ensure it's always an array
+      const response = await fetch("http://localhost:1337/fetchorder");
+      const data = await response.json();
+      setOrders(data.data || []);
     } catch (error) {
-        console.error("Error fetching orders:", error);
-        setOrders([]); // Prevent undefined errors
+      console.error("Error fetching orders:", error);
+      setOrders([]);
     }
-};
+  };
 
-
-  // Handle adding a new order
   const addOrder = async () => {
     try {
       const response = await fetch("http://localhost:1337/addorder", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newOrder) // Send the new order data
+        body: JSON.stringify(newOrder)
       });
 
       if (response.ok) {
-        // After successfully adding, re-fetch the orders
         fetchOrders();
       } else {
         console.error("Error adding order");
@@ -60,11 +58,10 @@ const Dashboard = () => {
       const response = await fetch(`http://localhost:1337/updateOrderStatus/${orderId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: newStatus }) // Send new status in the request body
+        body: JSON.stringify({ status: newStatus })
       });
   
       if (response.ok) {
-        // After updating the status, re-fetch the orders to ensure the data is fresh
         fetchOrders();
       } else {
         console.error("Error updating order status: Response not OK");
@@ -74,30 +71,47 @@ const Dashboard = () => {
     }
   };
   
+  // Get recent orders sorted by most recent first
+  const recentOrders = [...orders].slice(-5).reverse();
+
+  // Define the metric items for cleaner rendering
+  const metricItems = [
+    { title: "Total Orders", value: orders.length },
+    { title: "Pending Orders", value: orders.filter(order => order.status === "Pending").length },
+    { title: "Completed Orders", value: orders.filter(order => order.status === "Completed").length },
+    { title: "Active Customers", value: new Set(orders.map(order => order.customerName)).size }
+  ];
 
   return (
     <div className="dashboard-container">
       <Sidebar />
       <Box sx={{ flexGrow: 1 }} className="dashboard-content">
         {/* Top Bar */}
-        <AppBar position="static" color="default" sx={{ mb: 2, p: 1 }} className="top-bar">
+        <div className="top-bar">
           <Toolbar>
-            <Typography variant="h6" sx={{ flexGrow: 1 }} className="dashboard-title">
-              Dashboard
+            <Typography variant="h6" className="dashboard-title">
+              Order Management Dashboard
             </Typography>
-            <InputBase
-              placeholder="Search…"
-              sx={{ ml: 2, flex: 1, border: "1px solid gray", borderRadius: 1, p: 1 }}
-              className="search-input"
-            />
-            <IconButton className="search-box">
-              <SearchIcon />
-            </IconButton>
+            <Box>
+              <InputBase
+                placeholder="Search orders..."
+                className="search-input"
+              />
+              <IconButton className="search-box">
+                <SearchIcon />
+              </IconButton>
+            </Box>
           </Toolbar>
-        </AppBar>
+        </div>
 
         {/* Tabs */}
-        <Tabs value={tabValue} onChange={(e, newValue) => setTabValue(newValue)} className="dashboard-tabs">
+        <Tabs 
+          value={tabValue} 
+          onChange={(e, newValue) => setTabValue(newValue)}
+          className="dashboard-tabs"
+          TabIndicatorProps={{
+          }}
+        >
           <Tab label="Overview" />
           <Tab label="Analytics" disabled />
           <Tab label="Reports" disabled />
@@ -105,67 +119,70 @@ const Dashboard = () => {
         </Tabs>
 
         {/* Metrics Cards */}
-        <Grid container spacing={2} sx={{ mt: 2 }} className="metrics-grid">
-          {[ 
-            { title: "Total Orders", value: orders.length },
-            { title: "Pending Orders", value: orders.filter(order => order.status === "Pending").length },
-            { title: "Completed Orders", value: orders.filter(order => order.status === "Completed").length },
-            { title: "Active Customers", value: new Set(orders.map(order => order.customerName)).size }
-          ].map((item, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index} className="metric-card">
+        <div className="metrics-grid">
+          {metricItems.map((item, index) => (
+            <div className="metric-card" key={index}>
               <Card>
                 <CardContent>
-                  <Typography variant="subtitle1" color="textSecondary" className="metric-title">
+                  <Typography variant="subtitle2" className="metric-title">
                     {item.title}
                   </Typography>
-                  <Typography variant="h5" fontWeight="bold" className="metric-value">
+                  <Typography variant="h4" className="metric-value">
                     {item.value}
                   </Typography>
                 </CardContent>
               </Card>
-            </Grid>
+            </div>
           ))}
-        </Grid>
+        </div>
 
         {/* Overview & Recent Sales */}
-        <Grid container spacing={2} sx={{ mt: 2 }} className="overview-grid">
-          <Grid item xs={12} md={8}>
-            <Card className="overview-card">
-              <CardContent>
-                <Typography variant="h6">Overview</Typography>
-                <OrderBarChart orders={orders} />
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card className="overview-card">
-              <CardContent>
-                <Typography variant="h6">Recent Orders</Typography>
-                {orders.length > 0 ? (
-                  orders.slice(-5).map((order, index) => (
-                    <Typography key={index} variant="body2">
-                      {order.customerName} - {order.status}
-                      {/* Button to change status */}
+        <div className="overview-grid">
+          <Card>
+            <CardContent>
+              <Typography variant="h6">Sales Overview</Typography>
+              <OrderBarChart orders={orders} />
+            </CardContent>
+          </Card>
+          
+          <Card className="overview-card">
+            <CardContent>
+              <Typography variant="h6">Recent Orders</Typography>
+              {recentOrders.length > 0 ? (
+                recentOrders.map((order, index) => (
+                  <div key={index} className="recent-order-item">
+                    <div>
+                      <Typography variant="body2" className="recent-order-name">
+                        {order.customerName}
+                      </Typography>
+                      <Chip 
+                        label={order.status} 
+                        size="small"
+                        className={`status-badge status-${order.status.toLowerCase()}`}
+                      />
+                    </div>
+                    {order.status === "Pending" && (
                       <Button
-                        variant="outlined"
+                        variant="text"
+                        size="small"
+                        color="primary"
+                        startIcon={<CheckCircleIcon />}
                         onClick={() => changeStatus(order.id, "Completed")}
                       >
-                        Mark as Completed
+                        Complete
                       </Button>
-                    </Typography>
-                  ))
-                ) : (
-                  <Typography variant="body2">No recent orders.</Typography>
-                )}
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+                    )}
+                  </div>
+                ))
+              ) : (
+                <Typography variant="body2" sx={{ py: 2, textAlign: 'center', color: '#64748b' }}>
+                  No recent orders.
+                </Typography>
+              )}
+            </CardContent>
+          </Card>
+        </div>
 
-        {/* Add New Order Button */}
-        <Box sx={{ mt: 2, textAlign: "right" }} className="download-btn-container">
-          <Button variant="contained" onClick={addOrder} startIcon={<DownloadIcon />}>Add Order</Button>
-        </Box>
       </Box>
     </div>
   );

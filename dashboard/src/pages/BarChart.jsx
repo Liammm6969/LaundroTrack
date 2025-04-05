@@ -5,6 +5,7 @@ const OrderBarChart = ({ orders }) => {
   const data = [
     { status: "Pending", count: orders.filter(order => order.status === "Pending").length },
     { status: "Processing", count: orders.filter(order => order.status === "Processing").length },
+    { status: "Pick up", count: orders.filter(order => order.status === "Pick up").length },
     { status: "Completed", count: orders.filter(order => order.status === "Completed").length }
   ];
 

@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
-import { 
-  Box, Typography, Button, Tabs, Tab, Card, CardContent, 
-  AppBar, Toolbar, InputBase, IconButton, Chip
-} from "@mui/material";
+import { useLocation } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
-import AddIcon from "@mui/icons-material/Add";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import AddIcon from "@mui/icons-material/Add";
 import OrderBarChart from "./BarChart";
 import Sidebar from "./Sidebar";
 import "./Dashboard.css";
@@ -13,6 +10,7 @@ import "./Dashboard.css";
 const Dashboard = () => {
   const [tabValue, setTabValue] = useState(0);
   const [orders, setOrders] = useState([]);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [newOrder, setNewOrder] = useState({
     customerName: '',
     status: 'Pending',
@@ -82,108 +80,126 @@ const Dashboard = () => {
     { title: "Active Customers", value: new Set(orders.map(order => order.customerName)).size }
   ];
 
+  const handleSidebarToggle = (isOpen) => {
+    setSidebarOpen(isOpen);
+  };
+
   return (
-    <div className="dashboard-container">
-      <Sidebar />
-      <Box sx={{ flexGrow: 1 }} className="dashboard-content">
-        {/* Top Bar */}
-        <div className="top-bar">
-          <Toolbar>
-            <Typography variant="h6" className="dashboard-title">
+    <div className="app-container">
+      <Sidebar onToggle={handleSidebarToggle} />
+      <div className={`main-content ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+        <div className="dashboard-container">
+          <div className="top-bar">
+            <div className="dashboard-title">
               Order Management Dashboard
-            </Typography>
-            <Box>
-              <InputBase
+            </div>
+            <div className="search-container">
+              <input
+                type="text"
                 placeholder="Search orders..."
                 className="search-input"
               />
-              <IconButton className="search-box">
+              <button className="search-button">
                 <SearchIcon />
-              </IconButton>
-            </Box>
-          </Toolbar>
-        </div>
-
-        {/* Tabs */}
-        <Tabs 
-          value={tabValue} 
-          onChange={(e, newValue) => setTabValue(newValue)}
-          className="dashboard-tabs"
-          TabIndicatorProps={{
-          }}
-        >
-          <Tab label="Overview" />
-          <Tab label="Analytics" disabled />
-          <Tab label="Reports" disabled />
-          <Tab label="Notifications" disabled />
-        </Tabs>
-
-        {/* Metrics Cards */}
-        <div className="metrics-grid">
-          {metricItems.map((item, index) => (
-            <div className="metric-card" key={index}>
-              <Card>
-                <CardContent>
-                  <Typography variant="subtitle2" className="metric-title">
-                    {item.title}
-                  </Typography>
-                  <Typography variant="h4" className="metric-value">
-                    {item.value}
-                  </Typography>
-                </CardContent>
-              </Card>
+              </button>
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Overview & Recent Sales */}
-        <div className="overview-grid">
-          <Card>
-            <CardContent>
-              <Typography variant="h6">Sales Overview</Typography>
-              <OrderBarChart orders={orders} />
-            </CardContent>
-          </Card>
-          
-          <Card className="overview-card">
-            <CardContent>
-              <Typography variant="h6">Recent Orders</Typography>
-              {recentOrders.length > 0 ? (
-                recentOrders.map((order, index) => (
-                  <div key={index} className="recent-order-item">
-                    <div>
-                      <Typography variant="body2" className="recent-order-name">
-                        {order.customerName}
-                      </Typography>
-                      <Chip 
-                        label={order.status} 
-                        size="small"
-                        className={`status-badge status-${order.status.toLowerCase()}`}
-                      />
-                    </div>
-                    {order.status === "Pending" && (
-                      <Button
-                        variant="text"
-                        size="small"
-                        color="primary"
-                        startIcon={<CheckCircleIcon />}
-                        onClick={() => changeStatus(order.id, "Completed")}
-                      >
-                        Complete
-                      </Button>
-                    )}
+          {/* Tabs */}
+          <div className="dashboard-tabs">
+            <button 
+              className={`tab-button ${tabValue === 0 ? 'active' : ''}`}
+              onClick={() => setTabValue(0)}
+            >
+              Overview
+            </button>
+            <button 
+              className={`tab-button ${tabValue === 1 ? 'active' : ''}`}
+              onClick={() => setTabValue(1)}
+              disabled
+            >
+              Analytics
+            </button>
+            <button 
+              className={`tab-button ${tabValue === 2 ? 'active' : ''}`}
+              onClick={() => setTabValue(2)}
+              disabled
+            >
+              Reports
+            </button>
+            <button 
+              className={`tab-button ${tabValue === 3 ? 'active' : ''}`}
+              onClick={() => setTabValue(3)}
+              disabled
+            >
+              Notifications
+            </button>
+          </div>
+
+          {/* Metrics Cards */}
+          <div className="metrics-grid">
+            {metricItems.map((item, index) => (
+              <div className="metric-card" key={index}>
+                <div className="card-content">
+                  <div className="metric-title">
+                    {item.title}
                   </div>
-                ))
-              ) : (
-                <Typography variant="body2" sx={{ py: 2, textAlign: 'center', color: '#64748b' }}>
-                  No recent orders.
-                </Typography>
-              )}
-            </CardContent>
-          </Card>
-        </div>
+                  <div className="metric-value">
+                    {item.value}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
 
-      </Box>
+          {/* Overview & Recent Sales */}
+          <div className="overview-grid">
+            <div className="chart-card">
+              <div className="card-header">
+                Sales Overview
+              </div>
+              <div className="card-body">
+                <OrderBarChart orders={orders} />
+              </div>
+            </div>
+            
+            <div className="overview-card">
+              <div className="card-header">
+                Recent Orders
+              </div>
+              <div className="card-body">
+                {recentOrders.length > 0 ? (
+                  recentOrders.map((order, index) => (
+                    <div key={index} className="recent-order-item">
+                      <div className="order-info">
+                        <div className="recent-order-name">
+                          {order.customerName}
+                        </div>
+                        <div className={`status-badge status-${order.status.toLowerCase()}`}>
+                          {order.status}
+                        </div>
+                      </div>
+                      {order.status === "Pending" && (
+                        <button
+                          className="complete-button"
+                          onClick={() => changeStatus(order.id, "Completed")}
+                        >
+                          <CheckCircleIcon className="button-icon" />
+                          Complete
+                        </button>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <div className="no-orders-message">
+                    No recent orders.
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

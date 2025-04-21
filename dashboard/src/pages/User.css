@@ -1,33 +1,231 @@
+/* App Container */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* User Container */
+.user-container {
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(circle, #092353 30%, #07012b 110%);
+  transition: margin-left 0.3s ease, width 0.3s ease;
+  padding: 0;
+  overflow-y: auto;
+}
+
+/* Responsive container widths */
+.user-container.sidebar-open {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+}
+
+.user-container.sidebar-closed {
+  margin-left: 70px;
+  width: calc(100% - 70px);
+}
+
+/* User Info Container */
+.userInfo {
+  margin: 20px;
+  padding: 20px;
+  height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.user-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-header h2 {
+  color: white;
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.add-user-btn {
+  color: white;
+}
+
+/* Password toggle */
+.password-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.password-toggle button {
+  color: white;
+}
+
+/* Table wrapper for overflow */
+.table-wrapper {
+
+  overflow-x: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* User Table */
 .user-table {
-    max-height: 90vh;
-    overflow-y: auto;
-    background: white;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th, 
+.user-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-table th {
+  background-color: #1976d2;
+  color: white;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.user-table td {
+  font-size: 16px;
+  color: #555;
+}
+
+.user-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Actions cell */
+.user-actions {
+  white-space: nowrap;
+  display: flex;
+  gap: 5px;
+}
+
+/* Modal styles */
+.modal-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  max-width: 90%;
+  background-color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  padding: 24px;
+  border-radius: 8px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-box h2 {
+  margin-top: 0;
+  color: #1976d2;
+  margin-bottom: 16px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .user-container {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  
+  .userInfo {
+    margin: 15px;
+    padding: 15px;
+  }
+  
+  .user-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .user-table th, 
+  .user-table td {
+    padding: 10px 8px;
+  }
+  
+  .hide-on-mobile {
+    display: none;
+  }
+  
+  .modal-box {
+    width: 90%;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .userInfo {
+    margin: 10px;
+    padding: 10px;
+  }
+  
+  .user-header h2 {
+    font-size: 1.2rem;
+  }
+  
+  .user-table th, 
+  .user-table td {
+    padding: 8px 5px;
+    font-size: 14px;
+  }
+  
+  .hide-on-small {
+    display: none;
+  }
+  
+  .action-btn {
+    padding: 5px;
+  }
+  
+  .modal-box {
+    padding: 15px;
+  }
+  
+  .modal-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .modal-buttons button {
     width: 100%;
   }
-  
-  .user-table h3 {
-    margin-top: 0;
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .user-table th, td {
-    padding: 12px 40px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .user-table th {
-    background-color: #1976d2;
-    color: white;
-    font-weight: bold;
-  }
-  
-.user-table td {
-    font-size: 16px;
-    color: #555;
-  }
+}
+
+/* Column width optimizations */
+.user-id-col {
+  width: 80px;
+}
+
+.name-col {
+  width: 120px;
+}
+
+.username-col {
+  width: 120px;
+}
+
+.password-col {
+  width: 120px;
+}
+
+.actions-col {
+  width: 100px;
+}

@@ -31,19 +31,20 @@ function OrderStatus() {
 
   const handleSave = async () => {
     const updatedOrder = { ...order, status };
-
+    const orderId = order.orderId || order.id;
+  
     try {
       // Update the order on the server
-      await axios.put(`http://localhost:1337/updateorder/${order.id || order.orderId}`, updatedOrder);
+      await axios.put(`http://localhost:1337/updateorder/${orderId}`, updatedOrder);
       
       // Also update localStorage for consistency
       const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
       const updatedOrders = existingOrders.map((o) =>
-        (o.id === updatedOrder.id || o.orderId === updatedOrder.orderId) ? updatedOrder : o
+        (o.orderId === orderId || o.id === orderId) ? updatedOrder : o
       );
       localStorage.setItem("orders", JSON.stringify(updatedOrders));
       localStorage.setItem("selectedOrder", JSON.stringify(updatedOrder));
-
+  
       // Navigate back to home with updated order
       navigate("/home", { state: { updatedOrder } });
     } catch (error) {
@@ -144,7 +145,7 @@ function OrderStatus() {
             </thead>
             <tbody>
               <tr>
-                <td>1</td>
+                <td>{order.orderId}</td>
                 <td>{order.serviceType}</td>
                 <td>{order.laundryWeight} kg</td>
                 <td>${order.amountToPay}</td>

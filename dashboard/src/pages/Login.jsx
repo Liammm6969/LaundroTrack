@@ -35,9 +35,9 @@ function Login() {
 
   return (
     <div className="loginbody">
-      <div className="bubbles">
+      {/* <div className="bubbles">
       <img src="src\pictures\bubblesPng.png" alt="" />
-      </div>
+      </div> */}
       <div>
         
         <img src="" alt="" />

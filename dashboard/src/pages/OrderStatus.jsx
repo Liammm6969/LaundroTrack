@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import ChatBot from "./ChatBot";
-import "./OrderStatus.css";
+import "../styles/OrderStatus.css";
 import axios from "axios";
 
 function OrderStatus() {

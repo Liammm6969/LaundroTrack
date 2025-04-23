@@ -209,7 +209,19 @@ app.get("/fetchorder/customer/:customerId", async (req, res) => {
 app.post("/addorder", async (req, res) => {
   try {
     console.log("Received order data:", req.body);
-    const newOrder = new Order(req.body);
+    const { orderId, customerId, customerName, laundryWeight, amountToPay, serviceType, status, date } = req.body;
+
+    const newOrder = new Order({
+      orderId,
+      customerId,
+      customerName,
+      laundryWeight,
+      amountToPay,
+      serviceType,
+      status, // optional (defaults to 'Pending' if not provided)
+      date    // optional (defaults to now if not provided)
+    });
+
     const savedOrder = await newOrder.save();
     console.log("Saved order to database:", savedOrder);
     res.status(201).json(savedOrder);
@@ -218,6 +230,7 @@ app.post("/addorder", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
 
 // Update an order
 app.put("/updateorder/:orderId", async (req, res) => {

@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import Sidebar from "./Sidebar";
 import ChatBot from "./ChatBot";
-import "./Home.css";
+import "../styles/Home.css";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';

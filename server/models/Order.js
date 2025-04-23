@@ -4,14 +4,15 @@ const orderSchema = new mongoose.Schema({
   orderId: String,
   customerId: String,
   customerName: String,
-  laundryWeight: String,
+  laundryWeight: Number,
   amountToPay: Number,
+  serviceType: String,
   status: {
     type: String,
     enum: ['Pending', 'Processing', 'Ready', 'Delivered'],
     default: 'Pending'
   },
-  dateCreated: {
+  date: {
     type: Date,
     default: Date.now
   },

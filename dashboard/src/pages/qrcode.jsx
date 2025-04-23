@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./qrcode.css";
+import "../styles/qrcode.css";
 import { QRCodeCanvas } from "qrcode.react";
 import Sidebar from "./Sidebar";
 import ChatBot from "./ChatBot";

@@ -5,7 +5,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AddIcon from "@mui/icons-material/Add";
 import OrderBarChart from "./BarChart";
 import Sidebar from "./Sidebar";
-import "./Dashboard.css";
+import "../styles/Dashboard.css";
 
 const Dashboard = () => {
   const [tabValue, setTabValue] = useState(0);

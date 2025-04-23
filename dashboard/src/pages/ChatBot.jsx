@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import './ChatBot.css';
+import '../styles/ChatBot.css';
 import TextField from '@mui/material/TextField';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ChatIcon from '@mui/icons-material/Chat';

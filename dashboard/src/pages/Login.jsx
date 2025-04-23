@@ -1,31 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginIcon from "@mui/icons-material/Login";
-import { Button, IconButton, TextField, InputAdornment } from "@mui/material";
-import axios from "axios";
-import "./Login.css";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import "../styles/Login.css";
+import { TextField } from "@mui/material";
 
 function Login() {
-  const [formData, setFormData] = useState({ userName: "", password: "" });
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ username: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
-  function navigateToSignup(){
-    navigate('/signup')
+
+  function navigateToSignup() {
+    navigate('/signup');
   }
+
   async function handleLogin(event) {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:1337/login",
-        formData
-      );
+      // Replace with your actual authentication logic
+      console.log("Login attempt with:", formData);
       navigate("/home");
     } catch (error) {
       alert("Invalid username or password");
@@ -34,56 +30,75 @@ function Login() {
   }
 
   return (
-    <div className="loginbody">
-      {/* <div className="bubbles">
-      <img src="src\pictures\bubblesPng.png" alt="" />
-      </div> */}
-      <div>
-        
-        <img src="" alt="" />
-        <h1 className="title">LaundroTrack</h1>
-        
-        <p className="desc">Our system enhances user experience in managing laundry <br />LaundroTrack aims to innovate laundry management system</p>
+    <div className="login-container">
+      {/* Left side with illustration */}
+      <div className="loginBg">
+        <div className="image-content">
+        <div className="pic">
+          <img src="./src/pictures/LogIn.png" alt="Laundry illustration" />
+        </div>
+          <div className="feature-highlight">
+            <span className="star-icon">★</span> FEATURE HIGHLIGHT
+            <p className="feature-text">
+              Monitor, Manage, and Master Your Laundry Operations right in your LaundroTrack account!
+            </p>
+          </div>
+        </div>
       </div>
-      <div className="login">
-        <div className="login-box">
-          <h2 className="sign-in">Sign in</h2>
-          <form onSubmit={handleLogin}>
-            <TextField
-              type="text"
-              name="userName"
-              placeholder="Username"
-              value={formData.userName}
-              onChange={handleChange}
-              required
-              fullWidth
-              className="sign-in-field"
-            />
 
-            <div className="password-container">
+      {/* Right side with login form */}
+      <div className="login-side">
+        <div className="login-content">
+          <h1 className="app-name">LaundroTrack</h1>
+          
+          <div className="tagline">
+            <h2>Laundry Made Simple.</h2>
+            <h2>Tracking Made <br /> Smarter.</h2>
+          </div>
+          
+          <p className="welcome-message">
+            Welcome back! Please use your email or another service to sign in.
+          </p>
+          
+          <form onSubmit={handleLogin} className="login-form">
+            <div className="form-group">
+              <TextField
+                type="text"
+                variant="standard"
+                name="username"
+                placeholder="Username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+                className="form-input"
+              />
+            </div>
+            
+            <div className="form-group">
               <TextField
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Password"
+                variant="standard"
                 value={formData.password}
                 onChange={handleChange}
                 required
-                fullWidth
-                className="sign-in-field"
+                className="form-input"
               />
-              <IconButton
-                className="eyeIcon"
-                onClick={() => setShowPassword((prev) => !prev)}
-              >
-                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-              </IconButton>
-              
             </div>
-            <a href="" className="forgot"><u>Forgot your password?</u></a>
-            <Button variant="contained" type="submit" className="loginButton" startIcon={<LoginIcon />}>
+            
+            <button type="submit" className="login-button">
               Login
-            </Button>
-            <p className="sign-up" >Don't have an account? <a href="" onClick={navigateToSignup}>Sign up</a> </p>
+            </button>
+            <div className="form-footer">
+              <div className="signup-link">
+                <span>New to LaundroTrack?</span> 
+                <a href="#" onClick={navigateToSignup}> <u>Sign Up</u></a>
+              </div>
+              <div className="forgot-password">
+                <a href="#"><u>Forgot Password?</u></a>
+              </div>
+            </div>
           </form>
         </div>
       </div>

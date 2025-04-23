@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./User.css";
+import "../styles/User.css";
 import Sidebar from "./Sidebar.jsx";
 import TextField from "@mui/material/TextField";
 import { Button, Modal, Box, IconButton, Tooltip } from "@mui/material/";

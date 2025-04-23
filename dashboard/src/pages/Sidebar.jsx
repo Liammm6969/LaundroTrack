@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Sidebar.css";
+import "../styles/Sidebar.css";
 import { Link, useLocation } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import QrCodeIcon from "@mui/icons-material/QrCode";

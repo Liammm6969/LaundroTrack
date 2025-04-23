@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, IconButton, TextField, InputAdornment } from '@mui/material';
 import axios from 'axios';
-import './SignUp.css';
+import '../styles/SignUp.css';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';

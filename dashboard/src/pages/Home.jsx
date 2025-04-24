@@ -318,7 +318,7 @@ function Home() {
       <div className="content">
         <div className="dashboard">
           <div className="dashboard-header">
-            <h2>Dashboard</h2>
+            <h2>Hello, admin</h2>
             <Button
               className="add-btn"
               onClick={handleOpenAddModal}
@@ -341,7 +341,7 @@ function Home() {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <SearchIcon style={{ color: 'rgba(255, 255, 255, 0.7)' }} />
+                        <SearchIcon style={{ color: 'black' }} />
                       </InputAdornment>
                     ),
                   }}

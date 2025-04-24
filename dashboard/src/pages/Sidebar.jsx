@@ -75,56 +75,35 @@ function Sidebar({ onToggle }) {
           <div className={`menu ${isActive("/home")}`}>
             <HomeIcon className="icon" />
             <Link to="/home" className="link" onClick={() => isMobile && setIsOpen(false)}>
-              <p>HOME</p>
-            </Link>
-          </div>
-
-          <div className={`menu ${isActive("/qrcode")}`}>
-            <QrCodeIcon className="icon" />
-            <Link to="/qrcode" className="link" onClick={() => isMobile && setIsOpen(false)}>
-              <p>QR CODE</p>
-            </Link>
-          </div>
-
-          <div className={`menu ${isActive("/error")}`}>
-            <BuildIcon className="icon" />
-            <Link to="/error" className="link" onClick={() => isMobile && setIsOpen(false)}>
-              <p>SERVICES</p>
+              <p>Home</p>
             </Link>
           </div>
 
           <div className={`menu ${isActive("/dashboard")}`}>
             <AssessmentIcon className="icon" />
             <Link to="/dashboard" className="link" onClick={() => isMobile && setIsOpen(false)}>
-              <p>REPORTS</p>
-            </Link>
-          </div>
-
-          <div className={`menu ${isActive("/orderstatus")}`}>
-            <ShoppingCartIcon className="icon" />
-            <Link to="/orderstatus" className="link" onClick={() => isMobile && setIsOpen(false)}>
-              <p>ORDER STATUS</p>
+              <p>Reports</p>
             </Link>
           </div>
 
           <div className={`menu ${isActive("/user")}`}>
             <AccountCircleIcon className="icon" />
             <Link to="/user" className="link" onClick={() => isMobile && setIsOpen(false)}>
-              <p>USER</p>
+              <p>Users</p>
             </Link>
           </div>
 
           <div className="menu">
             <SettingsIcon className="icon" />
             <Link to="/error" className="link" onClick={() => isMobile && setIsOpen(false)}>
-              <p>SETTINGS</p>
+              <p>Settings</p>
             </Link>
           </div>
-
+          <hr />
           <div className="menu">
             <LogoutIcon className="icon" />
             <Link to="/login" className="link" onClick={() => isMobile && setIsOpen(false)}>
-              <p>LOGOUT</p>
+              <p>Logout</p>
             </Link>
           </div>
         </div>

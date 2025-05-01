@@ -4,12 +4,14 @@ const mongoose = require('mongoose');
 const User = require('./models/User');
 const Order = require('./models/Order');
 
+
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB with explicit database name
-mongoose.connect('mongodb+srv://hedmwpajarillo:williampajarillo21@laundrotrack.daf07zw.mongodb.net/laundrotrack?retryWrites=true&w=majority&appName=LaundroTrack')
+mongoose.connect('mongodb://localhost:27017/LaundroData')
   .then(() => {
     console.log('MongoDB Connected');
     console.log('Database name:', mongoose.connection.db.databaseName);
@@ -234,38 +236,26 @@ app.post("/addorder", async (req, res) => {
 
 // Update an order
 app.put("/updateorder/:orderId", async (req, res) => {
+  const { orderId } = req.params;
+
   try {
-    console.log("Update request for order ID:", req.params.orderId);
-    console.log("Update data:", req.body);
-    
-    // Try to update by MongoDB _id first
-    let updatedOrder = await Order.findByIdAndUpdate(
-      req.params.orderId, 
-      req.body, 
+    const updatedOrder = await Order.findOneAndUpdate(
+      { orderId: orderId }, // your custom field
+      req.body,
       { new: true }
     );
-    
-    // If not found by _id, try by orderId field
+
     if (!updatedOrder) {
-      updatedOrder = await Order.findOneAndUpdate(
-        { orderId: req.params.orderId }, 
-        req.body, 
-        { new: true }
-      );
-    }
-    
-    if (!updatedOrder) {
-      console.log("Order not found for update");
       return res.status(404).json({ message: "Order not found" });
     }
-    
-    console.log("Order updated successfully:", updatedOrder);
+
     res.json(updatedOrder);
   } catch (err) {
-    console.error("Error updating order:", err);
-    res.status(400).json({ message: err.message });
+    console.error("Update error:", err);
+    res.status(500).json({ message: "Internal server error", error: err.message });
   }
 });
+
 
 // Delete an order
 app.delete("/deleteorder/:orderId", async (req, res) => {

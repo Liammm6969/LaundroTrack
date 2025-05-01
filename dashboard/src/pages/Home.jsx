@@ -77,6 +77,19 @@ function Home() {
   const prevPage = () => setPage((prev) => (prev > 0 ? prev - 1 : prev));
   const goToPage = (pageNum) => setPage(pageNum);
 
+  const metrics = useMemo(() => {
+    const totalOrders = orders.length;
+    const completedOrders = orders.filter(o => o.status?.toLowerCase() === "completed").length;
+    const totalRevenue = orders.reduce((sum, o) => sum + (parseFloat(o.amountToPay) || 0), 0);
+  
+    return {
+      totalOrders,
+      completedOrders,
+      totalRevenue
+    };
+  }, [orders]);
+  
+
   // Load orders from API
   useEffect(() => {
     fetchOrders();

@@ -9,6 +9,8 @@ import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import SearchIcon from "@mui/icons-material/Search";
+import InputAdornment from "@mui/material/InputAdornment";
 
 function User() {
   const [users, setUsers] = useState([]);
@@ -18,6 +20,7 @@ function User() {
   const [showPassword, setShowPassword] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [formData, setFormData] = useState({
     userId: "",
@@ -126,87 +129,110 @@ function User() {
     return showPassword ? password : "•".repeat(password?.length || 0);
   }
 
+  // Filter users based on search term
+  const filteredUsers = users.filter(user => {
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      (user.firstName && user.firstName.toLowerCase().includes(searchLower)) ||
+      (user.lastName && user.lastName.toLowerCase().includes(searchLower)) ||
+      (user.userName && user.userName.toLowerCase().includes(searchLower))
+    );
+  });
+
   return (
     <div className="app-container">
       <Sidebar onToggle={handleSidebarToggle} />
-      <div
-        className={`user-container ${
-          isSidebarOpen ? "sidebar-open" : "sidebar-closed"
-        }`}
-      >
-        <div className="userInfo">
-          <div className="user-header">
-            <h2>User Management</h2>
-            <Tooltip title="Add User">
-              <IconButton
+      <div className="user-container">
+        <div className="user-content">
+          <div className="user-management">
+            <div className="user-header">
+              <h2>User Management</h2>
+              <Button
                 className="add-user-btn"
                 onClick={handleOpenAddModal}
-                color="inherit"
+                startIcon={<PersonAddAlt1Icon />}
               >
-                <PersonAddAlt1Icon />
-              </IconButton>
-            </Tooltip>
-          </div>
+                Add User
+              </Button>
+            </div>
 
-          <div className="password-toggle">
-            <Button
-              startIcon={
-                showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />
-              }
-              onClick={() => setShowPassword(!showPassword)}
-              size="small"
-              color="inherit"
-            >
-              {showPassword ? "Hide" : "Show"} Passwords
-            </Button>
-          </div>
+            <div className="table-wrapper">
+              <h3>
+                User List
+                <div className="table-controls">
+                  <TextField
+                    className="search-field"
+                    placeholder="Search users..."
+                    size="small"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <SearchIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <Button
+                    size="small"
+                    onClick={() => setShowPassword(!showPassword)}
+                    startIcon={showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                  >
+                    {showPassword ? "Hide" : "Show"} Passwords
+                  </Button>
+                </div>
+              </h3>
 
-          <div className="table-wrapper">
-            <table className="user-table">
-              <thead>
-                <tr>
-                  <th className="user-id-col">User ID</th>
-                  <th className="name-col">First Name</th>
-                  <th className="name-col">Last Name</th>
-                  <th className="name-col hide-on-mobile">Middle Name</th>
-                  <th className="username-col">Username</th>
-                  <th className="password-col hide-on-small">Password</th>
-                  <th className="actions-col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((user) => (
-                  <tr key={user._id}>
-                    <td>{user._id}</td>
-                    <td>{user.firstName}</td>
-                    <td>{user.lastName}</td>
-                    <td className="hide-on-mobile">{user.middleName}</td>
-                    <td>{user.userName}</td>
-                    <td className="hide-on-small">
-                      {maskPassword(user.password)}
-                    </td>
-                    <td className="user-actions">
-                      <IconButton
-                        onClick={() => handleEdit(user)}
-                        color="primary"
-                        size="small"
-                        className="action-btn"
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton
-                        onClick={() => handleDelete(user._id)}
-                        color="error"
-                        size="small"
-                        className="action-btn"
-                      >
-                        <PersonRemoveIcon />
-                      </IconButton>
-                    </td>
+              <table className="user-table">
+                <thead>
+                  <tr>
+                    <th className="user-id-col">User ID</th>
+                    <th className="name-col">First Name</th>
+                    <th className="name-col">Last Name</th>
+                    <th className="name-col hide-on-mobile">Middle Name</th>
+                    <th className="username-col">Username</th>
+                    <th className="password-col hide-on-small">Password</th>
+                    <th className="actions-col">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {filteredUsers.map((user) => (
+                    <tr key={user._id}>
+                      <td>{user.userId}</td>
+                      <td>{user.firstName}</td>
+                      <td>{user.lastName}</td>
+                      <td className="hide-on-mobile">{user.middleName}</td>
+                      <td>{user.userName}</td>
+                      <td className="hide-on-small">
+                        {maskPassword(user.password)}
+                      </td>
+                      <td className="user-actions">
+                        <button
+                          onClick={() => handleEdit(user)}
+                          className="edit-btn"
+                        >
+                          <EditIcon fontSize="small" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(user._id)}
+                          className="delete-btn"
+                        >
+                          <PersonRemoveIcon fontSize="small" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              {filteredUsers.length > 0 && (
+                <div className="table-pagination">
+                  <span className="pagination-info">Showing {filteredUsers.length} of {users.length} users</span>
+                  <button className="pagination-btn active">1</button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -278,12 +304,8 @@ function User() {
             }}
           />
           <div className="modal-buttons">
-            <Button variant="contained" color="primary" onClick={handleAddUser}>
-              Add User
-            </Button>
-            <Button variant="outlined" onClick={() => setOpenAdd(false)}>
-              Cancel
-            </Button>
+            <Button onClick={handleAddUser}>Add User</Button>
+            <Button onClick={() => setOpenAdd(false)}>Cancel</Button>
           </div>
         </Box>
       </Modal>
@@ -356,16 +378,8 @@ function User() {
             }}
           />
           <div className="modal-buttons">
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSaveChanges}
-            >
-              Save Changes
-            </Button>
-            <Button variant="outlined" onClick={() => setOpenEdit(false)}>
-              Cancel
-            </Button>
+            <Button onClick={handleSaveChanges}>Save Changes</Button>
+            <Button onClick={() => setOpenEdit(false)}>Cancel</Button>
           </div>
         </Box>
       </Modal>

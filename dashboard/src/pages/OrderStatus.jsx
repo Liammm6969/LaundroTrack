@@ -34,25 +34,18 @@ function OrderStatus() {
     const orderId = order.orderId || order.id;
   
     try {
-      // Update the order on the server
-      await axios.put(`http://localhost:1337/updateorder/${orderId}`, updatedOrder);
+      const response = await axios.put(`http://localhost:1337/updateorder/${orderId}`, updatedOrder);
+      console.log("Order update successful:", response.data);
       
-      // Also update localStorage for consistency
-      const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
-      const updatedOrders = existingOrders.map((o) =>
-        (o.orderId === orderId || o.id === orderId) ? updatedOrder : o
-      );
-      localStorage.setItem("orders", JSON.stringify(updatedOrders));
-      localStorage.setItem("selectedOrder", JSON.stringify(updatedOrder));
-  
-      // Navigate back to home with updated order
-      navigate("/home", { state: { updatedOrder } });
+      navigate("/home", { state: { updatedOrder: response.data } });
     } catch (error) {
-      console.error("Error updating order:", error);
-      alert("Failed to update order. Please try again.");
+      console.error("Order update failed:", error);
+  
+      const serverMessage = error.response?.data?.message || error.message || "Unknown error";
+      alert("Failed to update order. Reason: " + serverMessage);
     }
   };
-
+  
   return (
     <div className="orderPage">
       <Sidebar />

@@ -3,10 +3,10 @@ import { BarChart as RechartsBarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveCon
 
 const OrderBarChart = ({ orders }) => {
   const data = [
-    { status: "Pending", count: orders.filter(order => order.status === "Pending").length },
     { status: "Processing", count: orders.filter(order => order.status === "Processing").length },
-    { status: "Pick up", count: orders.filter(order => order.status === "Pick up").length },
-    { status: "Completed", count: orders.filter(order => order.status === "Completed").length }
+    { status: "Ready to be Picked Up", count: orders.filter(order => order.status === "Ready to be Picked Up").length },
+    { status: "Completed", count: orders.filter(order => order.status === "Completed").length },
+    { status: "Cancelled", count: orders.filter(order => order.status === "Cancelled").length }
   ];
 
   return (

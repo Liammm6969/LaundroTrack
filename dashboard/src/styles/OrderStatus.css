@@ -2,7 +2,7 @@
 .orderPage {
     width: calc(100% - 240px);
     height: 100vh;
-    background: radial-gradient(circle, #092353 30%, #07012b 110%);
+    background-color: white;
     margin-left: 240px;
     padding: 0;
     position: absolute;
@@ -28,7 +28,7 @@
 
 .header h2 {
     margin: 0;
-    color: white;
+    color: black;
     font-size: 1.75rem;
     font-weight: 600;
 }
@@ -55,11 +55,13 @@
 
 .left {
     background: #fff;
+    box-shadow: 11px 10px 25.5px rgba(161, 154, 154, 0.25);
     padding: 25px;
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
     width: 68%;
+
 }
 
 .left div {

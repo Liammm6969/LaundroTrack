@@ -13,7 +13,7 @@ The **Laundry Management System** is a web-based application that streamlines th
 ## 🛠️ Technologies Used
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Node.js, Express.js
-- **Database:** Doesn't have any yet
+- **Database:** MongoDB
 - **Version Control:** Git & GitHub
 S
 ## 🔧 Installation & Setup

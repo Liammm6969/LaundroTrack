@@ -15,7 +15,7 @@ The **Laundry Management System** is a web-based application that streamlines th
 - **Backend:** Node.js, Express.js
 - **Database:** Doesn't have any yet
 - **Version Control:** Git & GitHub
-
+S
 ## 🔧 Installation & Setup
 ### Prerequisites:
 - Install [Node.js](https://nodejs.org/)
@@ -42,8 +42,9 @@ The **Laundry Management System** is a web-based application that streamlines th
 5. Open the app in your browser: `http://localhost:3000`
 
 ## 📷 Screenshots
-<img src="https://github.com/user-attachments/assets/c49265b5-8066-40ee-8cfb-ec8f09dbe49e">
-<img src="https://github.com/user-attachments/assets/e8c8e0b6-9394-419d-9a47-f5bf5a56bf3e">
+<img src="https://github.com/user-attachments/assets/5933d960-765c-4c43-85aa-7ba1c750299a">
+<img src="https://github.com/user-attachments/assets/0ba15822-a188-4eee-82fa-0594ac9f22cd">
+
 
 ## 💡 Future Enhancements
 - Payment gateway integration

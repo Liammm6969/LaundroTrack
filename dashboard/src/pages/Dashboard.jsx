@@ -39,10 +39,8 @@ const Dashboard = () => {
     }
   };
   
-  // Get recent orders sorted by most recent first
   const recentOrders = [...orders].slice(-5).reverse();
 
-  // Define the metric items for cleaner rendering - improved with case-insensitive matching
   const metricItems = [
     { title: "Total Orders", value: orders.length },
     { 

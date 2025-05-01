@@ -46,6 +46,15 @@ function OrderStatus() {
     }
   };
   
+  const printReceipt = () => {
+    const style = document.createElement('style');
+    document.head.appendChild(style);
+    window.print();
+    setTimeout(() => {
+      document.head.removeChild(style);
+    }, 1000);
+  };
+  
   return (
     <div className="orderPage">
       <Sidebar />
@@ -95,7 +104,7 @@ function OrderStatus() {
             </div>
             <div className="payActions">
               <button className="add">Add Payment</button>
-              <button className="print">Print Invoice</button>
+              <button className="print" onClick={printReceipt}>Print Invoice</button>
               <button className="download">Download PDF</button>
               <button className="save" onClick={handleSave}>
                 Save Changes

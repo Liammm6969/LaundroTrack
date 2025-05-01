@@ -278,7 +278,23 @@
     font-size: 1.5rem;
     font-weight: 500;
 }
-
+@media print {
+    body * {
+      visibility: hidden;
+    }
+    .info, .info * {
+      visibility: visible;
+    }
+    .info {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+    .payActions {
+      display: none !important;
+    }
+  }
 /* Responsive design with better breakpoints */
 @media (max-width: 1280px) {
     .orderPage {

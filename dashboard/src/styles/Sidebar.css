@@ -162,9 +162,8 @@
   
   /* Mobile sidebar positioning */
   .sidebar {
-    width: 250px;
+    width: 50px;
     transform: translateX(-250px);
-    background: linear-gradient(135deg, #0078d7, #005ea6);
     z-index: 100;
   }
   
@@ -181,7 +180,7 @@
   /* Fix content positioning */
   .main-content {
     margin-left: 0 !important;
-    width: 100% !important;
+    width: 90% !important;
     padding-left: 10px;
     padding-right: 10px;
     transition: opacity 0.3s ease;
